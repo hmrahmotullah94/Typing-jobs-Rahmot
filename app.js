@@ -1,382 +1,263 @@
-/* =========================================
-   Typing Jobs PWA v1.0
-   Made by Rahmotullah
-========================================= */
+/* =================================
+   Typing Jobs PWA Controller
+================================= */
 
-
-/* ===============================
-   PWA INSTALL SYSTEM
-================================ */
 
 let deferredPrompt = null;
 
 
-const PWA = {
+/* ===============================
+   SERVICE WORKER
+================================ */
 
-    init(){
+if ("serviceWorker" in navigator) {
 
-        this.registerServiceWorker();
+window.addEventListener("load",()=>{
 
-        this.installHandler();
 
-        this.orientationSupport();
+navigator.serviceWorker.register(
+"/Typing-jobs-Rahmot/service-worker.js"
+)
 
-        this.networkStatus();
+.then(reg=>{
 
-    },
+console.log(
+"Service Worker:",
+reg.scope
+);
 
+})
 
-    registerServiceWorker(){
+.catch(err=>{
 
-        if("serviceWorker" in navigator){
+console.error(err);
 
-            window.addEventListener("load",()=>{
+});
 
-                navigator.serviceWorker.register(
-                    "/Typing-jobs-Rahmot/service-worker.js"
-                )
 
-                .then(reg=>{
+});
 
-                    console.log(
-                        "Service Worker Active:",
-                        reg.scope
-                    );
-
-                })
-
-                .catch(err=>{
-
-                    console.error(
-                        "Service Worker Error:",
-                        err
-                    );
-
-                });
-
-
-            });
-
-        }
-
-    },
-
-
-
-    installHandler(){
-
-
-        window.addEventListener(
-            "beforeinstallprompt",
-            (e)=>{
-
-
-                e.preventDefault();
-
-
-                deferredPrompt=e;
-
-
-                const bar=
-                document.getElementById("pwaBar");
-
-
-                if(bar){
-
-                    bar.hidden=false;
-
-                }
-
-
-            }
-        );
-
-
-
-        document.addEventListener(
-            "DOMContentLoaded",
-            ()=>{
-
-
-                const btn=
-                document.getElementById(
-                    "installButton"
-                );
-
-
-                const status=
-                document.getElementById(
-                    "pwaStatus"
-                );
-
-
-
-                if(btn){
-
-
-                    btn.addEventListener(
-                        "click",
-                        async()=>{
-
-
-                            if(!deferredPrompt){
-
-
-                                if(status){
-
-                                    status.innerHTML=
-                                    "Install অপশন প্রস্তুত হয়নি। Chrome Menu থেকে Install করুন।";
-
-                                }
-
-                                return;
-
-                            }
-
-
-
-                            deferredPrompt.prompt();
-
-
-
-                            const choice =
-                            await deferredPrompt.userChoice;
-
-
-
-                            if(choice.outcome==="accepted"){
-
-
-                                if(status){
-
-                                    status.innerHTML=
-                                    "অ্যাপ ইনস্টল হয়েছে";
-
-                                }
-
-
-                            }
-
-                            else{
-
-
-                                if(status){
-
-                                    status.innerHTML=
-                                    "ইনস্টল বাতিল হয়েছে";
-
-                                }
-
-
-                            }
-
-
-
-                            deferredPrompt=null;
-
-
-                        }
-                    );
-
-                }
-
-
-            }
-        );
-
-
-
-        window.addEventListener(
-            "appinstalled",
-            ()=>{
-
-
-                const bar=
-                document.getElementById(
-                    "pwaBar"
-                );
-
-
-                if(bar){
-
-                    bar.hidden=true;
-
-                }
-
-
-                console.log(
-                    "Typing Jobs Installed"
-                );
-
-
-            }
-        );
-
-
-    },
+}
 
 
 
 /* ===============================
-   AUTO SCREEN ROTATION
+   INSTALL BUTTON
 ================================ */
 
 
-orientationSupport(){
+window.addEventListener(
+"beforeinstallprompt",
+(e)=>{
 
 
-    window.addEventListener(
-        "load",
-        ()=>{
+e.preventDefault();
 
 
-            if(
-                screen.orientation &&
-                screen.orientation.lock
-            ){
+deferredPrompt=e;
 
 
-                screen.orientation.lock(
-                    "any"
-                )
-
-                .then(()=>{
-
-                    console.log(
-                        "Auto rotation enabled"
-                    );
-
-                })
-
-                .catch(()=>{
-
-                    console.log(
-                        "Rotation controlled by device"
-                    );
-
-                });
+let bar=document.getElementById(
+"pwaBar"
+);
 
 
-            }
+if(bar){
+
+bar.hidden=false;
+
+}
 
 
-        }
-    );
-
-},
+});
 
 
 
-/* ===============================
-   ONLINE OFFLINE STATUS
-================================ */
+window.addEventListener(
+"load",
+()=>{
 
 
-networkStatus(){
+const installBtn =
+document.getElementById(
+"installButton"
+);
 
 
-    const status=
-    document.getElementById(
-        "pwaStatus"
-    );
-
-
-    window.addEventListener(
-        "online",
-        ()=>{
-
-
-            if(status){
-
-                status.innerHTML=
-                "ইন্টারনেট সংযোগ চালু";
-
-            }
-
-
-        }
-    );
+const status =
+document.getElementById(
+"pwaStatus"
+);
 
 
 
-    window.addEventListener(
-        "offline",
-        ()=>{
+if(installBtn){
 
 
-            if(status){
-
-                status.innerHTML=
-                "অফলাইন মোড চালু";
-
-            }
+installBtn.onclick =
+async function(){
 
 
-        }
-    );
+if(!deferredPrompt){
+
+
+status.innerHTML =
+"Install প্রস্তুত নয়। Chrome Menu → Install app ব্যবহার করুন।";
+
+
+return;
 
 
 }
 
+
+
+deferredPrompt.prompt();
+
+
+
+let result =
+await deferredPrompt.userChoice;
+
+
+
+if(result.outcome==="accepted"){
+
+
+status.innerHTML =
+"App Install হয়েছে";
+
+
+}
+
+
+else{
+
+
+status.innerHTML =
+"Install বাতিল হয়েছে";
+
+
+}
+
+
+
+deferredPrompt=null;
 
 
 };
 
 
 
-
-
-/* START PWA */
-
-PWA.init();
-
-
-
-
-/* =================================
-   APP ORIENTATION BUTTON SUPPORT
-================================= */
-
-
-function enableRotation(){
-
-
-    if(
-        screen.orientation &&
-        screen.orientation.lock
-    ){
-
-
-        screen.orientation.lock(
-            "any"
-        );
-
-
-    }
-
 }
 
 
 
-/* =================================
-   UPDATE AVAILABLE DETECTION
-================================= */
+});
+
+
+
+
+
+window.addEventListener(
+"appinstalled",
+()=>{
+
+
+let bar =
+document.getElementById(
+"pwaBar"
+);
+
+
+if(bar){
+
+bar.hidden=true;
+
+}
+
+
+console.log(
+"Installed"
+);
+
+
+});
+
+
+
+
+
+/* ===============================
+   ONLINE OFFLINE
+================================ */
+
+
+window.addEventListener(
+"online",
+()=>{
+
+let s=document.getElementById(
+"pwaStatus"
+);
+
+if(s)
+s.innerHTML="Online";
+
+});
+
+
+window.addEventListener(
+"offline",
+()=>{
+
+let s=document.getElementById(
+"pwaStatus"
+);
+
+if(s)
+s.innerHTML="Offline Mode";
+
+});
+
+
+
+
+
+/* ===============================
+   ROTATION BUTTON
+================================ */
+
+
+window.enableRotation=function(){
 
 
 if(
-"serviceWorker" in navigator
+screen.orientation &&
+screen.orientation.lock
 ){
 
 
-navigator.serviceWorker.addEventListener(
-"controllerchange",
-()=>{
+screen.orientation.lock(
+"landscape"
+)
+
+.then(()=>{
 
 console.log(
-"New version available"
+"Landscape locked"
 );
+
+})
+
+.catch(err=>{
+
+console.log(err);
 
 });
 
 
 }
+
+
+};
