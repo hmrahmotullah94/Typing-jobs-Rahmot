@@ -1,18 +1,21 @@
-let deferredPrompt;
-
-const installBtn = document.getElementById("installButton");
-const status = document.getElementById("pwaStatus");
-
 if ("serviceWorker" in navigator) {
-    window.addEventListener("load", () => {
-        navigator.serviceWorker.register("./service-worker.js")
-            .then(() => {
-                console.log("Service Worker Registered");
-            })
-            .catch(err => {
-                console.log(err);
-            });
-    });
+
+window.addEventListener("load", () => {
+
+navigator.serviceWorker.register(
+"/Typing-jobs-Rahmot/service-worker.js"
+)
+
+.then(reg => {
+console.log("Service Worker Active:", reg.scope);
+})
+
+.catch(err => {
+console.error("Service Worker Error:", err);
+});
+
+});
+
 }
 
 window.addEventListener("beforeinstallprompt", (e) => {
