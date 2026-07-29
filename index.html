@@ -93,8 +93,7 @@
         @media (prefers-reduced-motion: reduce) {
             *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; }
         }
-        /* ===============================
- LANDSCA/* ==========================================
+        /* ==========================================
    TYPING AREA RESPONSIVE SYSTEM
    Landscape: Paragraph + Input Side by Side
    Portrait: Stack Layout
@@ -149,43 +148,6 @@ textarea#input-area{
 
 
 
-/* ==========================================
-   MOBILE LANDSCAPE + TABLET + DESKTOP
-========================================== */
-
-
-@media (orientation:landscape){
-
-
-    .typing-area{
-
-        display:grid;
-
-        grid-template-columns:1fr 1fr;
-
-        gap:15px;
-
-        align-items:stretch;
-
-        width:100%;
-
-    }
-
-
-
-    #display-text{
-
-        min-height:180px; !important;
-
-        max-height:180px; !important;
-
-        font-size:20px; !important;
-
-        padding:18px; !important;
-
-        overflow-y:auto;
-
-    }
 
 
 
@@ -889,6 +851,125 @@ textarea#input-area{
     .main-title{
 
         font-size:25px;
+
+    }
+
+
+}
+
+        /* =====================================
+   FINAL LANDSCAPE FIX
+   Typing Jobs PWA
+===================================== */
+
+@media screen and (orientation: landscape){
+
+    body{
+        padding:8px !important;
+    }
+
+
+    .container{
+
+        width:100% !important;
+        max-width:none !important;
+
+        padding:12px !important;
+
+    }
+
+
+
+    .branding-container{
+
+        margin-bottom:10px !important;
+
+    }
+
+
+    .main-title{
+
+        font-size:24px !important;
+
+    }
+
+
+
+    .setup-row{
+
+        margin-bottom:8px !important;
+
+    }
+
+
+
+
+    .typing-area{
+
+        display:grid !important;
+
+        grid-template-columns: 1fr 1fr !important;
+
+        gap:12px !important;
+
+        width:100% !important;
+
+    }
+
+
+
+    #display-text{
+
+        height:150px !important;
+
+        min-height:150px !important;
+
+        max-height:150px !important;
+
+
+        padding:12px !important;
+
+        font-size:18px !important;
+
+        line-height:1.5 !important;
+
+        overflow-y:auto !important;
+
+    }
+
+
+
+
+    textarea#input-area{
+
+        height:150px !important;
+
+        min-height:150px !important;
+
+        max-height:150px !important;
+
+
+        padding:12px !important;
+
+        font-size:18px !important;
+
+        line-height:1.5 !important;
+
+    }
+
+
+
+    .stats{
+
+        margin-top:10px !important;
+
+    }
+
+
+
+    .stat-box{
+
+        padding:6px !important;
 
     }
 
