@@ -1,49 +1,38 @@
-if ('serviceWorker' in navigator) {
-    window.addEventListener('load', () => {
-        navigator.serviceWorker.register('/sw.js').catch(() => {});
-    });
-}
-
-let deferredPrompt = null;
+let deferredPrompt;
+const installBtn = document.getElementById('installButton');
 const pwaBar = document.getElementById('pwaBar');
-const installButton = document.getElementById('installButton');
-const pwaStatus = document.getElementById('pwaStatus');
 
-function isStandalone() {
-    return window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;
+// ১. সার্ভিস ওয়ার্কার রেজিস্টার করা
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('./sw.js')
+      .then(reg => console.log('Service Worker Registered!', reg))
+      .catch(err => console.error('Service Worker Registration Failed!', err));
+  });
 }
 
-if (isStandalone() && pwaBar) {
-    pwaBar.hidden = true;
-}
-
+// ২. PWA ইনস্টল প্রম্পট হ্যান্ডেল করা
 window.addEventListener('beforeinstallprompt', (e) => {
-    e.preventDefault();
-    deferredPrompt = e;
-    if (pwaBar && !isStandalone()) {
-        pwaBar.hidden = false;
-    }
+  e.preventDefault();
+  deferredPrompt = e;
+  if (pwaBar) pwaBar.removeAttribute('hidden');
 });
 
-if (installButton) {
-    installButton.addEventListener('click', async () => {
-        if (!deferredPrompt) return;
-        installButton.disabled = true;
-        deferredPrompt.prompt();
-        const { outcome } = await deferredPrompt.userChoice;
-        deferredPrompt = null;
-        if (outcome === 'accepted' && pwaBar) {
-            pwaBar.hidden = true;
-        }
-        installButton.disabled = false;
-    });
+if (installBtn) {
+  installBtn.addEventListener('click', async () => {
+    if (deferredPrompt) {
+      deferredPrompt.prompt();
+      const { outcome } = await deferredPrompt.userChoice;
+      if (outcome === 'accepted') {
+        console.log('User accepted the install prompt');
+      }
+      deferredPrompt = null;
+      pwaBar.setAttribute('hidden', '');
+    }
+  });
 }
 
 window.addEventListener('appinstalled', () => {
-    deferredPrompt = null;
-    if (pwaBar) pwaBar.hidden = true;
+  console.log('PWA was installed');
+  if (pwaBar) pwaBar.setAttribute('hidden', '');
 });
-
-if (pwaStatus && /iPhone|iPad|iPod/.test(navigator.userAgent) && !isStandalone()) {
-    pwaStatus.textContent = 'আইফোনে ইনস্টল করতে শেয়ার বাটন থেকে "Add to Home Screen" বেছে নিন';
-}
