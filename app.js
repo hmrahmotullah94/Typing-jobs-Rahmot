@@ -1,76 +1,83 @@
-/* =================================
+/* =========================================
    Typing Jobs PWA Controller
-================================= */
+   Made by Rahmotullah
+========================================= */
 
 
 let deferredPrompt = null;
 
 
-/* ===============================
-   SERVICE WORKER
-================================ */
 
-if ("serviceWorker" in navigator) {
+/* =========================================
+   HIDE INSTALL BUTTON
+========================================= */
 
-window.addEventListener("load",()=>{
+function hideInstallButton(){
 
+    const bar = document.getElementById("pwaBar");
 
-navigator.serviceWorker.register(
-"/Typing-jobs-Rahmot/service-worker.js"
-)
+    if(bar){
 
-.then(reg=>{
+        bar.hidden = true;
 
-console.log(
-"Service Worker:",
-reg.scope
-);
-
-})
-
-.catch(err=>{
-
-console.error(err);
-
-});
-
-
-});
+    }
 
 }
 
 
 
-/* ===============================
-   INSTALL BUTTON
-================================ */
+/* =========================================
+   SHOW INSTALL BUTTON
+========================================= */
 
+function showInstallButton(){
 
-window.addEventListener(
-"beforeinstallprompt",
-(e)=>{
+    const bar = document.getElementById("pwaBar");
 
+    if(bar){
 
-e.preventDefault();
+        bar.hidden = false;
 
-
-deferredPrompt=e;
-
-
-let bar=document.getElementById(
-"pwaBar"
-);
-
-
-if(bar){
-
-bar.hidden=false;
+    }
 
 }
 
 
-});
 
+/* =========================================
+   CHECK APP INSTALLED
+========================================= */
+
+function checkInstallStatus(){
+
+
+    const installed =
+    window.matchMedia(
+        "(display-mode: standalone)"
+    ).matches
+    ||
+    window.navigator.standalone;
+
+
+
+    if(installed){
+
+        hideInstallButton();
+
+    }
+
+
+}
+
+
+
+
+/* =========================================
+   SERVICE WORKER REGISTER
+========================================= */
+
+
+if("serviceWorker" in navigator){
 
 
 window.addEventListener(
@@ -78,85 +85,195 @@ window.addEventListener(
 ()=>{
 
 
-const installBtn =
-document.getElementById(
-"installButton"
+navigator.serviceWorker.register(
+"/Typing-jobs-Rahmot/service-worker.js"
+)
+
+
+.then(reg=>{
+
+
+console.log(
+"Service Worker Running:",
+reg.scope
 );
 
 
-const status =
-document.getElementById(
-"pwaStatus"
+})
+
+
+.catch(err=>{
+
+
+console.error(
+"Service Worker Error:",
+err
 );
 
 
-
-if(installBtn){
-
-
-installBtn.onclick =
-async function(){
+});
 
 
-if(!deferredPrompt){
-
-
-status.innerHTML =
-"Install প্রস্তুত নয়। Chrome Menu → Install app ব্যবহার করুন।";
-
-
-return;
+});
 
 
 }
 
 
 
-deferredPrompt.prompt();
+
+
+/* =========================================
+   INSTALL PROMPT
+========================================= */
+
+
+window.addEventListener(
+"beforeinstallprompt",
+(e)=>{
+
+
+    e.preventDefault();
+
+
+    deferredPrompt = e;
 
 
 
-let result =
-await deferredPrompt.userChoice;
+    const installed =
+    window.matchMedia(
+    "(display-mode: standalone)"
+    ).matches;
 
 
 
-if(result.outcome==="accepted"){
+    if(!installed){
 
+        showInstallButton();
 
-status.innerHTML =
-"App Install হয়েছে";
-
-
-}
-
-
-else{
-
-
-status.innerHTML =
-"Install বাতিল হয়েছে";
-
-
-}
-
-
-
-deferredPrompt=null;
-
-
-};
-
-
-
-}
-
+    }
 
 
 });
 
 
 
+
+
+
+/* =========================================
+   INSTALL BUTTON CLICK
+========================================= */
+
+
+window.addEventListener(
+"DOMContentLoaded",
+()=>{
+
+
+    checkInstallStatus();
+
+
+
+    const installBtn =
+    document.getElementById(
+    "installButton"
+    );
+
+
+    const status =
+    document.getElementById(
+    "pwaStatus"
+    );
+
+
+
+    if(installBtn){
+
+
+    installBtn.addEventListener(
+    "click",
+    async()=>{
+
+
+        if(!deferredPrompt){
+
+
+            if(status){
+
+            status.innerHTML =
+            "Install প্রস্তুত নয়। Chrome Menu থেকে Install করুন।";
+
+            }
+
+
+            return;
+
+        }
+
+
+
+
+        deferredPrompt.prompt();
+
+
+
+        const result =
+        await deferredPrompt.userChoice;
+
+
+
+        if(result.outcome==="accepted"){
+
+
+            if(status){
+
+            status.innerHTML =
+            "অ্যাপ ইনস্টল হয়েছে";
+
+            }
+
+
+            hideInstallButton();
+
+
+        }
+        else{
+
+
+            if(status){
+
+            status.innerHTML =
+            "ইনস্টল বাতিল হয়েছে";
+
+            }
+
+
+        }
+
+
+
+        deferredPrompt = null;
+
+
+
+    });
+
+
+    }
+
+
+});
+
+
+
+
+
+
+
+/* =========================================
+   AFTER INSTALL
+========================================= */
 
 
 window.addEventListener(
@@ -164,22 +281,12 @@ window.addEventListener(
 ()=>{
 
 
-let bar =
-document.getElementById(
-"pwaBar"
-);
-
-
-if(bar){
-
-bar.hidden=true;
-
-}
-
-
 console.log(
-"Installed"
+"Typing Jobs Installed"
 );
+
+
+hideInstallButton();
 
 
 });
@@ -188,124 +295,29 @@ console.log(
 
 
 
-/* ===============================
-   ONLINE OFFLINE
-================================ */
+
+
+/* =========================================
+   ONLINE OFFLINE STATUS
+========================================= */
 
 
 window.addEventListener(
 "online",
 ()=>{
 
-let s=document.getElementById(
+
+const status =
+document.getElementById(
 "pwaStatus"
 );
 
-if(s)
-s.innerHTML="Online";
-
-});
 
 
-window.addEventListener(
-/* =================================
-   Typing Jobs PWA Controller
-================================= */
+if(status){
 
-let deferredPrompt = null;
-
-
-/* ===============================
-   SERVICE WORKER
-================================ */
-
-if ("serviceWorker" in navigator) {
-
-window.addEventListener("load",()=>{
-
-navigator.serviceWorker.register(
-"/Typing-jobs-Rahmot/service-worker.js"
-)
-
-.then(reg=>{
-
-console.log(
-"Service Worker Ready",
-reg.scope
-);
-
-})
-
-.catch(err=>{
-
-console.error(
-"SW Error:",
-err
-);
-
-});
-
-});
-
-}
-
-
-
-/* ===============================
-   CHECK INSTALLED STATUS
-================================ */
-
-function checkInstallStatus(){
-
-const bar =
-document.getElementById("pwaBar");
-
-
-if(
-window.matchMedia(
-"(display-mode: standalone)"
-).matches
-||
-window.navigator.standalone
-){
-
-
-if(bar){
-
-bar.hidden=true;
-
-}
-
-
-}
-
-}
-
-
-
-/* ===============================
-   INSTALL PROMPT
-================================ */
-
-
-window.addEventListener(
-"beforeinstallprompt",
-(e)=>{
-
-
-e.preventDefault();
-
-
-deferredPrompt=e;
-
-
-const bar =
-document.getElementById("pwaBar");
-
-
-if(bar){
-
-bar.hidden=false;
+status.innerHTML =
+"Online Mode";
 
 }
 
@@ -316,18 +328,8 @@ bar.hidden=false;
 
 
 window.addEventListener(
-"load",
+"offline",
 ()=>{
-
-
-checkInstallStatus();
-
-
-
-const installBtn =
-document.getElementById(
-"installButton"
-);
 
 
 const status =
@@ -337,81 +339,10 @@ document.getElementById(
 
 
 
-if(installBtn){
-
-
-installBtn.addEventListener(
-"click",
-async()=>{
-
-
-if(!deferredPrompt){
-
-
 if(status){
 
-status.innerHTML=
-"Install প্রস্তুত নয়";
-
-}
-
-
-return;
-
-}
-
-
-
-deferredPrompt.prompt();
-
-
-
-const choice =
-await deferredPrompt.userChoice;
-
-
-
-if(choice.outcome==="accepted"){
-
-
-if(status){
-
-status.innerHTML=
-"অ্যাপ ইনস্টল হচ্ছে...";
-
-}
-
-
-setTimeout(()=>{
-
-
-const bar =
-document.getElementById(
-"pwaBar"
-);
-
-
-if(bar){
-
-bar.hidden=true;
-
-}
-
-
-},1500);
-
-
-}
-
-
-
-deferredPrompt=null;
-
-
-}
-
-);
-
+status.innerHTML =
+"Offline Mode";
 
 }
 
@@ -422,42 +353,11 @@ deferredPrompt=null;
 
 
 
-window.addEventListener(
-"appinstalled",
-()=>{
 
 
-const bar =
-document.getElementById(
-"pwaBar"
-);
-
-
-if(bar){
-
-bar.hidden=true;
-
-}
-
-
-console.log(
-"PWA Installed"
-);
-
-
-
-enableAutoRotation();
-
-
-});
-
-
-
-
-
-/* ===============================
-   AUTO ROTATION
-================================ */
+/* =========================================
+   SCREEN ROTATION SUPPORT
+========================================= */
 
 
 async function enableAutoRotation(){
@@ -502,82 +402,56 @@ console.log(
 
 
 
-/* ===============================
-   ONLINE OFFLINE
-================================ */
 
+/* Installed app start হলে rotation চেষ্টা */
 
 window.addEventListener(
-"online",
+"load",
 ()=>{
 
 
-const s =
-document.getElementById(
-"pwaStatus"
-);
+const installed =
+window.matchMedia(
+"(display-mode: standalone)"
+).matches;
 
 
-if(s)
-s.innerHTML="Online";
 
+if(installed){
 
-});
+enableAutoRotation();
 
-
-window.addEventListener(
-"offline",
-()=>{
-
-
-const s =
-document.getElementById(
-"pwaStatus"
-);
-
-
-if(s)
-s.innerHTML="Offline Mode";
+}
 
 
 });
 
 
 
-/* ===============================
-   ROTATION BUTTON
-================================ */
 
 
-window.enableRotation=function(){
+
+/* =========================================
+   SERVICE WORKER UPDATE CHECK
+========================================= */
 
 
 if(
-screen.orientation &&
-screen.orientation.lock
+"serviceWorker" in navigator
 ){
 
 
-screen.orientation.lock(
-"landscape"
-)
+navigator.serviceWorker.addEventListener(
+"controllerchange",
+()=>{
 
-.then(()=>{
 
 console.log(
-"Landscape locked"
+"New update available"
 );
 
-})
-
-.catch(err=>{
-
-console.log(err);
 
 });
 
 
 }
-
-
-};
