@@ -304,64 +304,596 @@ textarea#input-area{
 
         box-sizing:border-box;
 
-        padding:20px;
+:root{
+    --primary:#1a237e;
+    --secondary:#b71c1c;
+    --accent:#00b8d4;
+    --bg:#e0e4e8;
+    --card-bg:#ffffff;
+    --text-main:#1c1e21;
+    --display-bg:#121212;
+    --display-text:#eceff1;
+}
+
+
+[data-theme="midnight"]{
+    --primary:#3949ab;
+    --bg:#0a192f;
+    --card-bg:#112240;
+    --text-main:#ccd6f6;
+    --display-bg:#020c1b;
+    --display-text:#64ffda;
+}
+
+
+[data-theme="forest"]{
+    --primary:#05e8e5;
+    --bg:#1b5e20;
+    --card-bg:#2e7d32;
+    --text-main:#e8f5e9;
+    --display-bg:#002400;
+    --display-text:#a5d6a7;
+}
+
+
+[data-theme="dark"]{
+    --primary:#424242;
+    --bg:#121212;
+    --card-bg:#1e1e1e;
+    --text-main:#ffffff;
+    --display-bg:#000000;
+    --display-text:#00ff00;
+}
+
+
+
+/* =========================
+   GLOBAL
+========================= */
+
+*{
+    box-sizing:border-box;
+}
+
+
+html,body{
+
+    width:100%;
+    min-height:100%;
+
+    margin:0;
+
+}
+
+
+body{
+
+    padding:15px;
+
+    font-family:
+    'Noto Sans Bengali',
+    'Hind Siliguri',
+    sans-serif;
+
+    background:var(--bg);
+
+    color:var(--text-main);
+
+}
+
+
+
+
+/* =========================
+   MAIN CONTAINER
+========================= */
+
+
+.container{
+
+    width:100%;
+
+    max-width:none;
+
+    min-height:100vh;
+
+    margin:auto;
+
+    padding:20px;
+
+    background:var(--card-bg);
+
+    border-radius:20px;
+
+    box-shadow:
+    0 15px 35px rgba(0,0,0,.15);
+
+}
+
+
+
+/* =========================
+   HEADER
+========================= */
+
+
+.branding-container{
+
+    text-align:center;
+
+    margin-bottom:20px;
+
+}
+
+
+.main-title{
+
+    margin:0;
+
+    font-size:32px;
+
+    color:var(--primary);
+
+    font-weight:800;
+
+}
+
+
+.sub-branding{
+
+    margin-top:5px;
+
+    color:var(--accent);
+
+    font-weight:bold;
+
+}
+
+
+
+/* =========================
+   SELECT AREA
+========================= */
+
+
+.setup-row{
+
+    display:flex;
+
+    gap:10px;
+
+    margin-bottom:15px;
+
+}
+
+
+select,
+button,
+input,
+textarea{
+
+    font-family:inherit;
+
+    font-size:16px;
+
+}
+
+
+
+
+
+/* =========================
+   MEANING
+========================= */
+
+
+#meaning-display{
+
+    text-align:center;
+
+    color:var(--secondary);
+
+    font-size:20px;
+
+    font-weight:bold;
+
+    min-height:30px;
+
+}
+
+
+
+/* =========================
+   MAIN TYPING AREA
+========================= */
+
+
+.typing-area{
+
+
+    display:grid;
+
+    grid-template-columns:
+
+    1fr 1fr;
+
+
+    gap:20px;
+
+
+    width:100%;
+
+
+}
+
+
+
+
+/* Paragraph Box */
+
+
+#display-text{
+
+
+    background:var(--display-bg);
+
+
+    color:var(--display-text);
+
+
+    border-left:
+
+    8px solid var(--accent);
+
+
+    border-radius:15px;
+
+
+    padding:25px;
+
+
+    min-height:260px;
+
+
+    max-height:400px;
+
+
+    overflow-y:auto;
+
+
+    font-size:22px;
+
+
+    line-height:1.8;
+
+
+    word-break:break-word;
+
+
+}
+
+
+
+/* Characters */
+
+
+.char{
+
+    white-space:pre-wrap;
+
+}
+
+
+.correct{
+
+    color:#4caf50;
+
+}
+
+
+.wrong{
+
+    color:white;
+
+    background:#ff1744;
+
+}
+
+
+.current{
+
+    background:rgba(0,184,212,.3);
+
+    border-bottom:3px solid var(--accent);
+
+}
+
+
+
+
+/* Input Box */
+
+
+textarea#input-area{
+
+
+    width:100%;
+
+
+    height:260px;
+
+
+    padding:25px;
+
+
+    border:
+
+    3px solid var(--primary);
+
+
+    border-radius:15px;
+
+
+    resize:none;
+
+
+    font-size:22px;
+
+
+    line-height:1.8;
+
+
+    background:var(--card-bg);
+
+
+    color:var(--text-main);
+
+
+}
+
+
+
+
+/* =========================
+   STATS
+========================= */
+
+
+.stats{
+
+    display:flex;
+
+    gap:10px;
+
+    margin-top:20px;
+
+}
+
+
+.stat-box{
+
+    flex:1;
+
+    background:var(--primary);
+
+    color:white;
+
+    padding:12px;
+
+    border-radius:12px;
+
+    text-align:center;
+
+}
+
+
+.stat-box span{
+
+    display:block;
+
+    font-size:22px;
+
+    color:#ffeb3b;
+
+}
+
+
+
+
+/* =========================
+   SIDEBAR
+========================= */
+
+
+.sidebar{
+
+    position:fixed;
+
+    top:0;
+
+    right:-350px;
+
+    width:300px;
+
+    height:100%;
+
+
+    background:var(--card-bg);
+
+
+    padding:25px;
+
+
+    transition:.3s;
+
+
+    z-index:1000;
+
+}
+
+
+.sidebar.active{
+
+    right:0;
+
+}
+
+
+
+/* =========================
+   BUTTON
+========================= */
+
+
+.toggle-btn{
+
+    position:fixed;
+
+    top:20px;
+
+    right:20px;
+
+
+    width:45px;
+
+    height:45px;
+
+
+    border:none;
+
+    border-radius:50%;
+
+
+    background:var(--accent);
+
+    color:white;
+
+    font-size:22px;
+
+    z-index:1200;
+
+}
+
+
+
+
+
+/* =========================
+   PWA INSTALL BAR
+========================= */
+
+
+.pwa-bar{
+
+    position:fixed;
+
+    bottom:20px;
+
+    left:20px;
+
+
+    display:flex;
+
+    gap:10px;
+
+    align-items:center;
+
+
+    padding:10px 15px;
+
+
+    background:#121212;
+
+    color:white;
+
+
+    border-radius:15px;
+
+
+    z-index:2000;
+
+}
+
+
+
+
+/* =========================
+   PORTRAIT MODE
+========================= */
+
+
+@media screen and (orientation:portrait){
+
+
+    body{
+
+        padding:10px;
 
     }
 
 
     .typing-area{
 
-        display:grid !important;
-
-        grid-template-columns:50% 50% !important;
-
-        width:100% !important;
-
-        gap:15px;
-
-    }
-
-
-    #display-text{
-
-        width:100% !important;
-
-        min-height:250px;
-
-        box-sizing:border-box;
+        grid-template-columns:1fr;
 
     }
 
 
     textarea#input-area{
 
-        width:100% !important;
+        height:140px;
 
-        height:250px !important;
-
-        box-sizing:border-box;
+        font-size:20px;
 
     }
 
-}   
-
-     @media screen and (orientation: landscape){
-
-    .typing-area{
-        display:grid !important;
-        grid-template-columns:1fr 1fr !important;
-        gap:20px !important;
-    }
 
     #display-text{
-        height:260px !important;
+
+        min-height:170px;
+
+        font-size:20px;
+
     }
 
-    #input-area{
-        height:260px !important;
+
+    .setup-row{
+
+        display:grid;
+
+        grid-template-columns:1fr 1fr;
+
     }
 
-}   
+}
+
+
+
+/* =========================
+   SMALL MOBILE
+========================= */
+
+
+@media(max-width:500px){
+
+
+    .container{
+
+        padding:15px;
+
+        border-radius:12px;
+
+    }
+
+
+    .main-title{
+
+        font-size:25px;
+
+    }
+
+
+}
     </style>
 </head>
 <body>
