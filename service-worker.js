@@ -1,83 +1,66 @@
-const CACHE = "typingjobs-v1";
+const CACHE = "typingjobs-v2";
 
 const FILES = [
-
-"./",
-
-"./index.html",
-
-"./manifest.json",
-
-"./app.js"
-
+"/Typing-jobs-Rahmot/",
+"/Typing-jobs-Rahmot/index.html",
+"/Typing-jobs-Rahmot/manifest.json",
+"/Typing-jobs-Rahmot/app.js",
+"/Typing-jobs-Rahmot/icon-192.png",
+"/Typing-jobs-Rahmot/icon-512.png",
+"/Typing-jobs-Rahmot/icon-512-maskable.png"
 ];
+
 
 self.addEventListener("install", event => {
 
-event.waitUntil(
+    event.waitUntil(
+        caches.open(CACHE)
+        .then(cache => cache.addAll(FILES))
+    );
 
-caches.open(CACHE).then(cache => {
-
-return cache.addAll(FILES);
-
-})
-
-);
-
-self.skipWaiting();
+    self.skipWaiting();
 
 });
+
 
 self.addEventListener("activate", event => {
 
-event.waitUntil(
+    event.waitUntil(
 
-caches.keys().then(keys =>
+        caches.keys().then(keys => {
 
-Promise.all(
+            return Promise.all(
 
-keys.map(key => {
+                keys.map(key => {
 
-if (key !== CACHE)
+                    if(key !== CACHE){
+                        return caches.delete(key);
+                    }
 
-return caches.delete(key);
+                })
 
-})
+            );
 
-)
+        })
 
-)
+    );
 
-);
-
-self.clients.claim();
+    self.clients.claim();
 
 });
+
 
 self.addEventListener("fetch", event => {
 
-event.respondWith(
+    event.respondWith(
 
-caches.match(event.request)
+        caches.match(event.request)
+        .then(response => {
 
-.then(response => {
+            return response || fetch(event.request);
 
-return response || fetch(event.request)
+        })
 
-.then(network => {
-
-return network;
-
-})
-
-.catch(() => {
-
-return caches.match("./index.html");
-
-});
-
-})
-
-);
+    );
 
 });
