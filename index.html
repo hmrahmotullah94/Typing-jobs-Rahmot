@@ -285,7 +285,65 @@ textarea#input-area{
 
 
 }
-        
+     /* =================================
+   PWA LANDSCAPE FIX
+================================= */
+
+@media screen and (orientation: landscape){
+
+    body{
+        padding:10px;
+    }
+
+
+    .container{
+
+        max-width:none !important;
+
+        width:100% !important;
+
+        box-sizing:border-box;
+
+        padding:20px;
+
+    }
+
+
+    .typing-area{
+
+        display:grid !important;
+
+        grid-template-columns:50% 50% !important;
+
+        width:100% !important;
+
+        gap:15px;
+
+    }
+
+
+    #display-text{
+
+        width:100% !important;
+
+        min-height:250px;
+
+        box-sizing:border-box;
+
+    }
+
+
+    textarea#input-area{
+
+        width:100% !important;
+
+        height:250px !important;
+
+        box-sizing:border-box;
+
+    }
+
+}   
     </style>
 </head>
 <body>
