@@ -1,3 +1,9 @@
+let deferredPrompt;
+
+const installBtn = document.getElementById("installButton");
+const status = document.getElementById("pwaStatus");
+
+
 if ("serviceWorker" in navigator) {
 
 window.addEventListener("load",()=>{
@@ -6,22 +12,24 @@ navigator.serviceWorker.register(
 "/Typing-jobs-Rahmot/service-worker.js"
 )
 .then(reg=>{
-console.log("SW OK:",reg.scope);
+console.log("SW OK:", reg.scope);
 })
 .catch(err=>{
-console.log("SW Error:",err);
+console.log("SW Error:", err);
 });
 
 });
 
 }
-window.addEventListener("beforeinstallprompt", (e) => {
 
-    e.preventDefault();
 
-    deferredPrompt = e;
+window.addEventListener("beforeinstallprompt", (e)=>{
 
-    document.getElementById("pwaBar").hidden = false;
+e.preventDefault();
+
+deferredPrompt=e;
+
+document.getElementById("pwaBar").hidden=false;
 
 });
 
