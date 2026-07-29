@@ -94,64 +94,195 @@
             *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; }
         }
         /* ===============================
- LANDSCAPE TYPING AREA
-=============================== */
+ LANDSCA/* ==========================================
+   TYPING AREA RESPONSIVE SYSTEM
+   Landscape: Paragraph + Input Side by Side
+   Portrait: Stack Layout
+========================================== */
 
+
+/* Default Layout */
 .typing-area{
-    display:flex;
-    gap:20px;
+
     width:100%;
-    align-items:stretch;
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:15px;
+
 }
 
-.typing-area > *{
-    flex:1;
+
+/* Paragraph Box */
+
+#display-text{
+
+    width:100%;
+
+    min-height:180px;
+
+    max-height:300px;
+
+    overflow-y:auto;
+
+    box-sizing:border-box;
+
 }
 
 
-/* Desktop Landscape */
-@media (min-width:700px) and (orientation:landscape){
+
+/* Input Box */
+
+textarea#input-area{
+
+    width:100%;
+
+    min-height:180px;
+
+    box-sizing:border-box;
+
+}
+
+
+
+
+
+/* ==========================================
+   MOBILE LANDSCAPE + TABLET + DESKTOP
+========================================== */
+
+
+@media (orientation:landscape){
+
 
     .typing-area{
+
         display:grid;
+
         grid-template-columns:1fr 1fr;
+
         gap:20px;
+
+        align-items:stretch;
+
+        width:100%;
+
     }
+
 
 
     #display-text{
-        min-height:100px;
-        max-height:160px;
-        font-size:20px;
+
+        min-height:260px;
+
+        max-height:350px;
+
+        font-size:22px;
+
+        padding:25px;
+
+        overflow-y:auto;
+
     }
+
 
 
     textarea#input-area{
-        height:160px;
-        font-size:20px;
+
+        height:260px;
+
+        min-height:260px;
+
+        font-size:22px;
+
+        padding:20px;
+
     }
+
 
 }
 
 
-/* Mobile Portrait */
-@media(max-width:500px){
+
+
+
+/* ==========================================
+   SMALL PORTRAIT MOBILE
+========================================== */
+
+
+@media (max-width:699px) and (orientation:portrait){
+
 
     .typing-area{
+
         display:block;
+
     }
+
 
 
     #display-text{
+
         margin-bottom:15px;
-        min-height:100px;
-        max-height:160px;
+
+        min-height:160px;
+
+        font-size:21px;
+
     }
+
 
 
     textarea#input-area{
+
         height:130px;
+
+        min-height:130px;
+
+        font-size:20px;
+
     }
+
+
+}
+
+
+
+
+
+/* ==========================================
+   LARGE SCREEN OPTIMIZATION
+========================================== */
+
+
+@media (min-width:1000px){
+
+
+    .typing-area{
+
+        gap:25px;
+
+    }
+
+
+
+    #display-text{
+
+        font-size:24px;
+
+    }
+
+
+
+    textarea#input-area{
+
+        font-size:24px;
+
+    }
+
 
 }
         
