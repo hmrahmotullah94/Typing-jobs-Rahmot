@@ -1,38 +1,68 @@
 let deferredPrompt;
-const installBtn = document.getElementById('installButton');
-const pwaBar = document.getElementById('pwaBar');
 
-// ১. সার্ভিস ওয়ার্কার রেজিস্টার করা
-if ('serviceWorker' in navigator) {
-  window.addEventListener('load', () => {
-    navigator.serviceWorker.register('./sw.js')
-      .then(reg => console.log('Service Worker Registered!', reg))
-      .catch(err => console.error('Service Worker Registration Failed!', err));
-  });
+const installBtn = document.getElementById("installButton");
+const status = document.getElementById("pwaStatus");
+
+if ("serviceWorker" in navigator) {
+    window.addEventListener("load", () => {
+        navigator.serviceWorker.register("./service-worker.js")
+            .then(() => {
+                console.log("Service Worker Registered");
+            })
+            .catch(err => {
+                console.log(err);
+            });
+    });
 }
 
-// ২. PWA ইনস্টল প্রম্পট হ্যান্ডেল করা
-window.addEventListener('beforeinstallprompt', (e) => {
-  e.preventDefault();
-  deferredPrompt = e;
-  if (pwaBar) pwaBar.removeAttribute('hidden');
+window.addEventListener("beforeinstallprompt", (e) => {
+
+    e.preventDefault();
+
+    deferredPrompt = e;
+
+    document.getElementById("pwaBar").hidden = false;
+
 });
 
-if (installBtn) {
-  installBtn.addEventListener('click', async () => {
-    if (deferredPrompt) {
-      deferredPrompt.prompt();
-      const { outcome } = await deferredPrompt.userChoice;
-      if (outcome === 'accepted') {
-        console.log('User accepted the install prompt');
-      }
-      deferredPrompt = null;
-      pwaBar.setAttribute('hidden', '');
-    }
-  });
-}
+installBtn.addEventListener("click", async () => {
 
-window.addEventListener('appinstalled', () => {
-  console.log('PWA was installed');
-  if (pwaBar) pwaBar.setAttribute('hidden', '');
+    if (!deferredPrompt) return;
+
+    deferredPrompt.prompt();
+
+    const choice = await deferredPrompt.userChoice;
+
+    if (choice.outcome === "accepted") {
+
+        status.innerHTML = "অ্যাপ ইনস্টল হয়েছে";
+
+    } else {
+
+        status.innerHTML = "ইনস্টল বাতিল হয়েছে";
+
+    }
+
+    deferredPrompt = null;
+
+});
+
+window.addEventListener("appinstalled", () => {
+
+    document.getElementById("pwaBar").hidden = true;
+
+    status.innerHTML = "ইনস্টল সম্পন্ন";
+
+});
+
+window.addEventListener("online", () => {
+
+    status.innerHTML = "অনলাইন";
+
+});
+
+window.addEventListener("offline", () => {
+
+    status.innerHTML = "অফলাইন মোড";
+
 });
