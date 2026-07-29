@@ -1,32 +1,29 @@
 {
-"name":"Typing Jobs",
-"short_name":"Typing Jobs",
-"start_url":"./",
-"display":"standalone",
-"background_color":"#ffffff",
-"theme_color":"#1a237e",
+  "id": "/Typing-jobs-Rahmot/",
+  "name": "Typing Jobs",
+  "short_name": "Typing Jobs",
+  "start_url": "/Typing-jobs-Rahmot/",
+  "scope": "/Typing-jobs-Rahmot/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#1a237e",
 
-"icons":[
-
-{
-"src":"icon-192.png",
-"sizes":"192x192",
-"type":"image/png"
-},
-
-{
-"src":"icon-512.png",
-"sizes":"512x512",
-"type":"image/png"
-},
-
-{
-"src":"icon-512-maskable.png",
-"sizes":"512x512",
-"type":"image/png",
-"purpose":"maskable"
-}
-
-]
-
+  "icons": [
+    {
+      "src": "/Typing-jobs-Rahmot/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/Typing-jobs-Rahmot/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    },
+    {
+      "src": "/Typing-jobs-Rahmot/icon-512-maskable.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
 }
