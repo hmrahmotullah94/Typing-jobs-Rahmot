@@ -1,23 +1,20 @@
 if ("serviceWorker" in navigator) {
 
-window.addEventListener("load", () => {
+window.addEventListener("load",()=>{
 
 navigator.serviceWorker.register(
 "/Typing-jobs-Rahmot/service-worker.js"
 )
-
-.then(reg => {
-console.log("Service Worker Active:", reg.scope);
+.then(reg=>{
+console.log("SW OK:",reg.scope);
 })
-
-.catch(err => {
-console.error("Service Worker Error:", err);
+.catch(err=>{
+console.log("SW Error:",err);
 });
 
 });
 
 }
-
 window.addEventListener("beforeinstallprompt", (e) => {
 
     e.preventDefault();
