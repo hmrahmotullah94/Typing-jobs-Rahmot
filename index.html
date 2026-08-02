@@ -1688,9 +1688,14 @@ function loadLesson() {
         
         }
 
-        if(typed.length >= chars.length && !done && chars.length > 0) {
+                // শেষের অক্ষরটি সম্পূর্ণ টাইপ হয়েছে কিনা এবং যুক্তবর্ণের মোডে (gPressed / pendingKar) আছে কিনা তা যাচাই
+        const isLastCharComplete = (typed.length > chars.length) || 
+                                   (typed[typed.length - 1] === chars[chars.length - 1]);
+
+        if (typed.length >= chars.length && !done && chars.length > 0 && !state.gPressed && state.pendingKar === "" && isLastCharComplete) {
             setTimeout(finish, 100);
         }
+
     }
 
 
