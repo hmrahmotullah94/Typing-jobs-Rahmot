@@ -1,6 +1,6 @@
 /* ==========================================
    Typing Jobs PWA Service Worker
-   Version 11
+   Version 11.1
    Made by Rahmotullah
 ========================================== */
 
