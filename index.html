@@ -2021,9 +2021,15 @@ function toggleSidebar() {
             else { modal.style.display = "none"; input.focus(); }
         } else if (e.key === 'Escape') {
             fullResetCurrent();
-        }
-    });
 
+// সাইডবার টগল করার মূল ফাংশন
+function toggleSidebar() {
+    const sidebar = document.getElementById('side'); 
+    const overlay = document.querySelector('.sidebar-overlay');
+
+    if (sidebar) sidebar.classList.toggle('active');
+    if (overlay) overlay.classList.toggle('active');
+}
     function fullResetCurrent() {
         input.value = ""; done = false; active = false; clearInterval(timer); time = 0; state.gPressed = false; state.pendingKar = "";
         document.getElementById('st-time').innerText = "0"; document.getElementById('st-wpm').innerText = "0"; document.getElementById('st-acc').innerText = "100%";
@@ -2035,80 +2041,9 @@ function toggleSidebar() {
         input.focus();
     }
 
-    function toggleSidebar() {
-        const sidebar = document.getElementById('side'); 
-        const overlay = document.querySelector('.sidebar-overlay');
-        
-        if (sidebar) sidebar.classList.toggle('active');
-        if (overlay) overlay.classList.toggle('active');
-    }
-
     window.addEventListener('load', () => { renderC(); initApp(); });
-
-    let isPaperMode = false;
-    function togglePaperMode() {
-        isPaperMode = !isPaperMode;
-        const btn = document.getElementById("paperBtn");
-        const body = document.body;
-
-        if (isPaperMode) {
-            body.classList.add('paper-mode-active');
-            if(btn) {
-                btn.innerText = "শিট দেখে টাইপ: ON";
-                btn.style.background = "#c62828";
-            }
-        } else {
-            body.classList.remove('paper-mode-active');
-            if(btn) {
-                btn.innerText = "শিট দেখে টাইপ: OFF";
-                btn.style.background = "#00897b";
-            }
-        }
-        
-        if (typeof fullResetCurrent === "function") {
-            fullResetCurrent();
-        } else {
-            resetApp();
-        }
-
-        const inputArea = document.getElementById("input-area");
-        if (inputArea) inputArea.focus();
-    }
-
-    function toggleTestMode(){
-        testMode = !testMode;
-        const btn = document.getElementById("testBtn");
-
-        if(testMode){
-            if(btn) {
-                btn.innerText="Test ON";
-                btn.style.background="#c62828";
-            }
-        }else{
-            if(btn) {
-                btn.innerText="Test OFF";
-                btn.style.background="#00897b";
-            }
-        }
-    } 
-
-    function toggleBijoyMode() {
-        isBijoyActive = !isBijoyActive;
-        const btn = document.getElementById("bijoyBtn");
-        
-        if (isBijoyActive) {
-            if(btn) {
-                btn.innerText = "বিজয় ON";
-                btn.style.background = "#2e7d32";
-            }
-        } else {
-            if(btn) {
-                btn.innerText = "বিজয় OFF (ইউনিকোদ/অভ্র)";
-                btn.style.background = "#c62828";
-            }
-        }
-    }
-
+</script>
+<script src="./app.js" defer></script>
     
 </script>
 <script src="./app.js" defer></script>
