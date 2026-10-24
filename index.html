@@ -25,12 +25,12 @@
         .sub-branding { font-size: 14px; color: var(--accent); font-weight: bold; margin-top: 5px; display: flex; align-items: center; justify-content: center; gap: 10px; }
         .sub-branding a { display: inline-grid; place-items: center; color: #1877F2; text-decoration: none; }
         .sub-branding svg { width: 22px; height: 22px; fill: currentColor; }
-        #display-text {  position: relative; 
+        #display-text { position: relative;
     background: var(--display-bg); 
-    padding: 5px; 
+    padding: 10px; 
     border-radius: 12px; 
-    font-size: 22px; 
-    line-height: 1.8; 
+    font-size: 20px; 
+    line-height: 1.3; 
     color: var(--display-text); 
     border-left: 8px solid var(--accent); 
     min-height: 180px;
@@ -48,10 +48,10 @@
         textarea#input-area { 
     width:100%;
     height:180px;
-    padding:5px;
+    padding:10px;
     border:3px solid var(--primary);
     border-radius:12px;
-    font-size:22px;
+    font-size:18px;
     line-height:1.3;
     outline:none;
     resize:none;
@@ -59,10 +59,8 @@
     color:var(--text-main);
     box-sizing:border-box;
 }
-        
-        .sidebar { position: fixed; top: 0; right: -350px; width: 200px; height: 100%; background: var(--card-bg); box-shadow: -10px 0 30px rgba(0,0,0,0.3); transition: 0.4s; z-index: 1000; padding: 25px; overflow-y: auto; }
+        .sidebar { position: fixed; top: 0; right: -350px; width: 300px; height: 100%; background: var(--card-bg); box-shadow: -10px 0 30px rgba(0,0,0,0.3); transition: 0.4s; z-index: 1000; padding: 25px; overflow-y: auto; }
         .sidebar.active { right: 0; }
-
         /* ব্যাকগ্রাউন্ড ওভারলে */
 .sidebar-overlay {
     position: fixed;
@@ -98,22 +96,22 @@ body.paper-mode-active .typing-area {
 }
 
 body.paper-mode-active textarea#input-area {
-    height: 260px !important; /* টাইপিং বক্সকে পুরো ডিসপ্লে জুড়েই বড় করবে */
+    height: 240px !important; /* টাইপিং বক্সকে পুরো ডিসপ্লে জুড়েই বড় করবে */
     min-height: 200px !important;
     width: 100% !important;
 }
-        .toggle-btn { position: fixed; top: max(10px, env(safe-area-inset-top)); right: max(10px, env(safe-area-inset-right)); width: 45px; height: 45px; padding: 0; border: 0; background: var(--accent); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 1001; font-size: 22px; box-shadow: 0 8px 24px rgba(0,0,0,.2); }
+        .toggle-btn { position: fixed; top: max(10px, env(safe-area-inset-top)); right: max(10px, env(safe-area-inset-right)); width: 45px; height: 50px; padding: 0; border: 0; background: var(--accent); color: water; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 1001; font-size: 22px; box-shadow: 0 8px 24px rgba(0,0,0,.2); }
         .stats { display: flex; justify-content: space-between; margin-top: 15px; gap: 10px; }
         .stat-box { flex: 1; background: var(--primary); color: white; padding: 10px; border-radius: 10px; text-align: center; }
         .stat-box span { display: block; font-size: 20px; font-weight: bold; color: #ffeb3b; }
-        #meaning-display { text-align: center; font-size: 20px; font-weight: bold; color: var(--secondary); margin-bottom: 10px; min-height: 30px; }
+        #meaning-display { text-align: center; font-size: 20px; font-weight: bold; color: var(--secondary); margin-bottom: 5px; min-height: 20px; }
         #modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.85); z-index: 2000; align-items: center; justify-content: center; }
         .modal-body { background: var(--card-bg); padding: 35px; border-radius: 20px; text-align: center; border: 5px solid var(--primary); width: 320px; }
         .setup-row { display: flex; gap: 8px; margin-bottom: 12px; }
-        select, input, button { padding: 10px; border-radius: 6px; border: 1px solid #ccc; font-family: inherit; }
-        button, select, textarea, input { font-size: 16px; }
+        select, input, button { padding: 5px; border-radius: 6px; border: 1px solid #ccc; font-family: inherit; }
+        button, select, textarea, input { font-size: 14px; }
         button:focus-visible, select:focus-visible, textarea:focus-visible, input:focus-visible, a:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
-        .pwa-bar { position: fixed; left: max(20px, env(safe-area-inset-left)); bottom: max(20px, env(safe-area-inset-bottom)); z-index: 1200; display: flex; align-items: center; gap: 10px; max-width: min(420px, calc(100vw - 40px)); padding: 10px 12px; color: #fff; background: rgba(18, 18, 18, .92); border: 1px solid rgba(255,255,255,.2); border-radius: 14px; box-shadow: 0 12px 35px rgba(0,0,0,.28); backdrop-filter: blur(12px); }
+        .pwa-bar { position: flex; left: max(20px, env(safe-area-inset-left)); bottom: max(20px, env(safe-area-inset-bottom)); z-index: 1200; display: flex; align-items: center; gap: 10px; max-width: min(420px, calc(100vw - 40px)); padding: 10px 12px; color: #fff; background: rgba(18, 18, 18, .92); border: 1px solid rgba(255,255,255,.2); border-radius: 14px; box-shadow: 0 12px 35px rgba(0,0,0,.28); backdrop-filter: blur(12px); }
         .pwa-bar[hidden] { display: none; }
         .pwa-bar button { flex: 0 0 auto; border: 0; color: #071d22; background: #7ee7f3; font-weight: 700; cursor: pointer; }
         .pwa-status { font-size: 13px; line-height: 1.35; }
@@ -124,8 +122,10 @@ body.paper-mode-active textarea#input-area {
             .sub-branding { font-size: 11px; }
             .setup-row { display: grid; grid-template-columns: 1fr 1fr; }
             #lesson-sel { grid-column: 1 / -1; }
-            #display-text { position: relative; padding: 18px 14px; font-size: 23px; line-height: 1.65; }
-            textarea#input-area { height: 115px; font-size: 20px; }
+            #display-text {
+            position: relative;
+            padding: 18px 14px; font-size: 23px; line-height: 1.3; }
+            textarea#input-area { height: 115px; font-size: 15px; line-height: 1.3; }
             .stats { gap: 6px; }
             .stat-box { padding: 8px 4px; font-size: 13px; }
             .stat-box span { font-size: 17px; }
@@ -134,7 +134,8 @@ body.paper-mode-active textarea#input-area {
         @media (prefers-reduced-motion: reduce) {
             *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; }
         }
-        /* ==========================================
+        /* ===============================
+ LANDSCAPE
    TYPING AREA RESPONSIVE SYSTEM
    Landscape: Paragraph + Input Side by Side
    Portrait: Stack Layout
@@ -150,20 +151,20 @@ body.paper-mode-active textarea#input-area {
 
     flex-direction:column;
 
-    gap:5px;
+    gap:15px;
 
 }
 
 
 /* Paragraph Box */
 
-#display-text{ position: relative; 
+#display-text{ position: relative;
 
     width:100%;
 
-    min-height:180px;
+    min-height:120px;
 
-    max-height:300px;
+    max-height:130px;
 
     overflow-y:auto;
 
@@ -179,7 +180,7 @@ textarea#input-area{
 
     width:100%;
 
-    min-height:180px;
+    min-height:120px;
 
     box-sizing:border-box;
 
@@ -189,14 +190,51 @@ textarea#input-area{
 
 
 
+/* ==========================================
+   MOBILE LANDSCAPE + TABLET + DESKTOP
+========================================== */
+
+
+@media (orientation:landscape){
+
+
+    .typing-area{
+
+        display:grid;
+
+        grid-template-columns:1fr 1fr;
+
+        gap:15px;
+
+        align-items:stretch;
+
+        width:100%;
+
+    }
+
+
+
+    #display-text{ position: relative;
+
+        min-height:120px; !important;
+
+        max-height:130px; !important;
+
+        font-size:20px; !important;
+
+        padding:5px; !important;
+
+        overflow-y:auto;
+
+    }
 
 
 
     textarea#input-area{
 
-        height:180px; !important;
+        height:120px; !important;
 
-        min-height:180px; !important;
+        min-height:120px; !important;
 
         font-size:20px; !important;
 
@@ -227,9 +265,9 @@ textarea#input-area{
 
 
 
-    #display-text{  position: relative; 
+    #display-text{ position: relative;
 
-        margin-bottom:5px;
+        margin-bottom:10px;
 
         min-height:160px;
 
@@ -243,7 +281,7 @@ textarea#input-area{
 
         height:130px;
 
-        min-height:130px;
+        min-height:120px;
 
         font-size:20px;
 
@@ -266,15 +304,15 @@ textarea#input-area{
 
     .typing-area{
 
-        gap:5px;
+        gap:25px;
 
     }
 
 
 
-    #display-text{ position: relative; 
+    #display-text{ position: relative;
 
-        font-size:24px;
+        font-size:18px;
 
     }
 
@@ -282,7 +320,7 @@ textarea#input-area{
 
     textarea#input-area{
 
-        font-size:24px;
+        font-size:15px;
 
     }
 
@@ -305,7 +343,7 @@ textarea#input-area{
 
         width:100% !important;
 
-        box-sizing:border-box;
+        box-sizing:border-box;}
 
 :root{
     --primary:#1a237e;
@@ -371,7 +409,7 @@ html,body{
 
 body{
 
-    padding:5px;
+    padding:8px;
 
     font-family:
     'Noto Sans Bengali',
@@ -402,7 +440,7 @@ body{
 
     margin:auto;
 
-    padding:5px;
+    padding:10px;
 
     background:var(--card-bg);
 
@@ -424,7 +462,7 @@ body{
 
     text-align:center;
 
-    margin-bottom:20px;
+    margin-bottom:10px;
 
 }
 
@@ -465,7 +503,7 @@ body{
 
     gap:10px;
 
-    margin-bottom:15px;
+    margin-bottom:10px;
 
 }
 
@@ -500,7 +538,7 @@ textarea{
 
     font-weight:bold;
 
-    min-height:10px;
+    min-height:20px;
 
 }
 
@@ -518,7 +556,7 @@ textarea{
 
     grid-template-columns:
 
-    1fr 2fr;
+    2fr 3fr;
 
 
     gap:5px;
@@ -535,7 +573,7 @@ textarea{
 /* Paragraph Box */
 
 
-#display-text{ position: relative; 
+#display-text{ position: relative;
 
 
     background:var(--display-bg);
@@ -549,16 +587,16 @@ textarea{
     5px solid var(--accent);
 
 
-    border-radius:5px;
+    border-radius:10px;
 
 
-    padding:5px;
+    padding:3px;
 
 
-    min-height:150px;
+    min-height:140px;
 
 
-    max-height:200px;
+    max-height:170px;
 
 
     overflow-y:auto;
@@ -623,10 +661,10 @@ textarea#input-area{
     width:100%;
 
 
-    height:200px;
+    height:170px;
 
 
-    padding:5px;
+    padding:3px;
 
 
     border:
@@ -634,16 +672,17 @@ textarea#input-area{
     3px solid var(--primary);
 
 
-    border-radius:5px;
+    border-radius:10px;
 
 
     resize:none;
 
 
-    font-size:22px;
+    font-size:20px;
 
 
     line-height:1.3;
+    word-break:break-word;
 
 
     background:var(--card-bg);
@@ -681,7 +720,7 @@ textarea#input-area{
 
     color:white;
 
-    padding:5px;
+    padding:3px;
 
     border-radius:12px;
 
@@ -750,9 +789,9 @@ textarea#input-area{
 
 .toggle-btn{
 
-    position:fixed;
+    position:flex;
 
-    top:20px;
+    top:5px;
 
     right:20px;
 
@@ -764,7 +803,7 @@ textarea#input-area{
 
     border:none;
 
-    border-radius:50%;
+    border-radius:30%;
 
 
     background:var(--accent);
@@ -788,7 +827,7 @@ textarea#input-area{
 
 .pwa-bar{
 
-    position:fixed;
+    position:flex;
 
     bottom:20px;
 
@@ -851,7 +890,7 @@ textarea#input-area{
     }
 
 
-    #display-text{  position: relative; 
+    #display-text{ position: relative;
 
         min-height:170px;
 
@@ -882,7 +921,7 @@ textarea#input-area{
 
     .container{
 
-        padding:15px;
+        padding:10px;
 
         border-radius:12px;
 
@@ -892,125 +931,6 @@ textarea#input-area{
     .main-title{
 
         font-size:25px;
-
-    }
-
-
-}
-
-        /* =====================================
-   FINAL LANDSCAPE FIX
-   Typing Jobs PWA
-===================================== */
-
-@media screen and (orientation: landscape){
-
-    body{
-        padding:5px !important;
-    }
-
-
-    .container{
-
-        width:100% !important;
-        max-width:none !important;
-
-        padding:5px !important;
-
-    }
-
-
-
-    .branding-container{
-
-        margin-bottom:5px !important;
-
-    }
-
-
-    .main-title{
-
-        font-size:24px !important;
-
-    }
-
-
-
-    .setup-row{
-
-        margin-bottom:8px !important;
-
-    }
-
-
-
-
-    .typing-area{
-
-        display:grid !important;
-
-        grid-template-columns: 1fr 2fr !important;
-
-        gap:5px !important;
-
-        width:100% !important;
-
-    }
-
-
-
-    #display-text{ position: relative; 
-
-        height:150px !important;
-
-        min-height:150px !important;
-
-        max-height:200px !important;
-
-
-        padding:5px !important;
-
-        font-size:18px !important;
-
-        line-height:1.3 !important;
-
-        overflow-y:auto !important;
-
-    }
-
-
-
-
-    textarea#input-area{
-
-        height:150px !important;
-
-        min-height:150px !important;
-
-        max-height:200px !important;
-
-
-        padding:5px !important;
-
-        font-size:18px !important;
-
-        line-height:1.3 !important;
-
-    }
-
-
-
-    .stats{
-
-        margin-top:5px !important;
-
-    }
-
-
-
-    .stat-box{
-
-        padding:3px !important;
 
     }
 
@@ -1047,11 +967,19 @@ textarea#input-area{
 <div class="sidebar-overlay" onclick="toggleSidebar()"></div>
 <div class="sidebar" id="side">
     <h3 style="text-align: center;">সেটিংস</h3>
+    
+    <!-- বিজয় / নরমাল টাইপিং টগল বাটন -->
+    <label>টাইপিং মোড:</label>
+    <button id="bijoyBtn" onclick="toggleBijoyMode()" style="width:100%; background:#2e7d32; color:white; font-weight:bold; margin-bottom:15px; cursor:pointer;">
+        বিজয় টাইপিং: ON
+    </button>
+
     <!-- নতুন: শিট দেখে টাইপ করার বাটন -->
 <label>ফিজিক্যাল শিট টাইপিং:</label>
 <button id="paperBtn" onclick="togglePaperMode()" style="width:100%; background:#00897b; color:white; font-weight:bold; margin-bottom:15px; cursor:pointer;">
     শিট দেখে টাইপ: OFF
 </button>
+    
     <label>ফন্ট স্টাইল:</label>
     <select id="f-style" onchange="updateFStyle(this.value)" style="width:100%; margin-bottom:15px;">
         <option value="'Nikosh'">Nikosh (Standard)</option>
@@ -1069,21 +997,34 @@ textarea#input-area{
         <option value="forest">Forest Green</option>
         <option value="dark">Pure Dark</option>
     </select>
+    
+    <hr>
+
+<label>টাইপিং টেস্ট মোড:</label>
+
+<button id="testBtn" 
+onclick="toggleTestMode()"
+style="width:100%; 
+background:#00897b;
+color:white;
+font-weight:bold;">
+Test OFF
+</button>
     <hr>
     <label>কাস্টম প্যারাগ্রাফ সেভ:</label>
-    <textarea id="c-in" style="width:100%; height:70px; margin-top:5px;" placeholder="নিজের টেক্সট এখানে দিন..."></textarea>
+    <textarea id="c-in" style="width:100%; height:70px; margin-top:5px;" placeholder="নিজের টেক্সট এখানে দিন...(if any problem or suggestion, WhatsApp 01897502833)"></textarea>
     <button onclick="saveC()" style="width:100%; margin-top:8px; background:var(--primary); color:white; border:none; cursor:pointer; font-weight:bold;">সেভ করুন</button>
     <div id="c-list" style="margin-top:10px; max-height:150px; overflow-y:auto;"></div>
 </div>
 
 <div class="container">
     <div class="branding-container">
-        <h1 class="main-title">Typing Jobs</h1>
-        <div class="sub-branding">MADE BY RAHMOTULLAH, CST-6,RU <a href="https://www.facebook.com/rahmotullah.ru.bd" target="_blank" rel="noopener noreferrer" aria-label="ফেসবুক প্রোফাইল"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22 12.06C22 6.5 17.52 2 12 2S2 6.5 2 12.06C2 17.08 5.66 21.25 10.44 22v-7.03H7.9v-2.91h2.54V9.85c0-2.52 1.5-3.91 3.78-3.91 1.09 0 2.23.2 2.23.2v2.46H15.2c-1.24 0-1.63.77-1.63 1.56v1.9h2.78l-.44 2.91h-2.34V22C18.34 21.25 22 17.08 22 12.06Z"/></svg></a></div>
+        <h1 class="main-title">Typing⌨️📲Jobs💻</h1>
+        <div class="sub-branding">DEVELOPED🛠️ BY RAHMOTULLAH, CST-6,RU👉<a href="https://www.facebook.com/rahmotullah.ru.bd" target="_blank" rel="noopener noreferrer" aria-label="ফেসবুক প্রোফাইল"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22 12.06C22 6.5 17.52 2 12 2S2 6.5 2 12.06C2 17.08 5.66 21.25 10.44 22v-7.03H7.9v-2.91h2.54V9.85c0-2.52 1.5-3.91 3.78-3.91 1.09 0 2.23.2 2.23.2v2.46H15.2c-1.24 0-1.63.77-1.63 1.56v1.9h2.78l-.44 2.91h-2.34V22C18.34 21.25 22 17.08 22 12.06Z"/></svg></a></div>
     </div>
     <div class="setup-row">
-        <select id="lang" onchange="initApp()" style="flex:1;"><option value="bn">বাংলা</option><option value="en" selected>English</option></select>
-        <select id="mode" onchange="initApp()" style="flex:1;"><option value="words">শব্দ (৫ বার)</option><option value="para">বাক্য</option><option value="custom">কাস্টম(Go setting to add)</option></select>
+        <select id="lang" onchange="initApp()" style="flex:1;"><option value="bn">📗বাংলা</option><option value="en" selected>English📕</option></select>
+        <select id="mode" onchange="initApp()" style="flex:1;"><option value="words">📖শব্দ (৫ বার)</option><option value="para">📑বাক্য</option><option value="custom">✍️কাস্টম(Go setting to add)</option></select>
         <select id="lesson-sel" onchange="loadLesson()" style="flex:2;"></select>
     </div>
     <div id="meaning-display"></div>
@@ -1095,16 +1036,16 @@ textarea#input-area{
 
 
 <textarea id="input-area" 
-placeholder="টাইপ শুরু করুন... (Enter = Result/Next) এবং শিট টাইপিং এর ক্ষেত্রে Ctrl+c চেপে Word count দেখুন" 
+placeholder="Type👇here...(মোবাইলে বিজয় বাংলা টাইপের জন্য মোবাইলের ডিফল্ট/গুগল কী-বোর্ডে English সিলেক্ট করে রাখুন, *শিট/পেপার টাইপিং শেষে Word count দেখতে হলে Ctrl+c চাপুন)" 
 autocomplete="off" 
 spellcheck="false"></textarea>
 
 </div>
     <div class="stats">
-        <div class="stat-box">সময় <span id="st-time">০</span></div>
-        <div class="stat-box">WPM <span id="st-wpm">০</span></div>
-        <div class="stat-box">নির্ভুলতা <span id="st-acc">১০০%</span></div>
-        <div class="stat-box">মোট শব্দ<span id="st-wrong">0</span></div>
+        <div class="stat-box">🕰️সময় <span id="st-time">০</span></div>
+        <div class="stat-box">WPM⏰ <span id="st-wpm">০</span></div>
+        <div class="stat-box">👍নির্ভুলতা <span id="st-acc">১০০%</span></div>
+        <div class="stat-box">মোট📄শব্দ<span id="st-wrong">0</span></div>
     </div>
 </div>
 
@@ -1266,10 +1207,10 @@ spellcheck="false"></textarea>
            "আয় বুঝে ব্যয় কর।", "সবার উপরে আল্লাহ সত্য।", "নিজের চরকায় তেল দাও।", "অতি লোভে তাঁতি নষ্ট।", "অল্প বিদ্যা ভয়ংকরী।", "ইচ্ছা থাকলে উপায় হয়।", "চোরে না শোনে ধর্মের কাহিনী।", "জোর যার মুল্লুক তার।", "ডুবন্ত মানুষ খড়কুটোও ধরে।", "তেল মাথায় তেল দেওয়া।", "নাই মামার চেয়ে কানা মামা ভালো।",
             "পাস করলেই শিক্ষিত হওয়া যায় না।", "হয়তো সে আসবে।", "দয়া করে ভেতরে আসুন।", "আপনি কেমন আছেন?", "আমি আজ খুব খুশি।", "পাখিরা আকাশে ওড়ে।", "মাছ পানিতে বাস করে।", "পদ্মা একটি বড় নদী।", "রাজশাহী একটি প্রাচীন শহর।", "সে খুব ভালো গান গায়।", "সূর্য অস্ত যাচ্ছে ", "চাঁদ আলো দেয়।",
              "ফুলটি খুব সুন্দর।", "সে প্রতিদিন স্কুলে যায়।", "বাবা বাজার থেকে ফিরলেন।", "আমি ভাত খাই।", "তুমি কি যাবে?", "সে পড়াশোনা করছে।", "আজ বৃষ্টি হতে পারে।", "গাছ আমাদের পরম বন্ধু।", "বাগানটি খুব বড়।", "সকালে হাওয়া শরীরের জন্য ভালো।", "বড়দের শ্রদ্ধা করা উচিত।", "বইটি খুব দামী।", "কলমটি টেবিলের উপরে আছে।",
-              "পুকুরে অনেক পানি।", "আকাশ নীল দেখাচ্ছে।", "সে দ্রুত দৌড়াতে পারে।", "টিভি দেখা কমিয়ে দাও।", "কম্পিউটার একটি আধুনিক যন্ত্র।", "ज्ञानই শক্তি।", "ক্ষমা মহত্ত্বের লক্ষণ।", "চরিত্র মানুষের অমূল্য সম্পদ।", "দেশকে ভালোবাসুন।", "শ্রমের মর্যাদা দিন।", "সময়ের সদ্ব্যবহার করুন।", "বিনয় মানুষকে বড় করে।", "ধৈর্য ধরুন।",
+              "পুকুরে অনেক পানি।", "আকাশ নীল দেখাচ্ছে।", "সে দ্রুত দৌড়াতে পারে।", "টিভি দেখা কমিয়ে দাও।", "কম্পিউটার একটি আধুনিক যন্ত্র।", "জ্ঞানই শক্তি।", "ক্ষমা মহত্ত্বের লক্ষণ।", "চরিত্র মানুষের অমূল্য সম্পদ।", "দেশকে ভালোবাসুন।", "শ্রমের মর্যাদা দিন।", "সময়ের সদ্ব্যবহার করুন।", "বিনয় মানুষকে বড় করে।", "ধৈর্য ধরুন।",
                "সত্যের জয় অবশ্যম্ভাবী।", "পাপীকে নয় পাপকে ঘৃণা করুন।", "পরোপকার একটি মহৎ গুণ।", "অহিংসা ভালো কাজ।", "সাদা মনে কাদা নেই।", "আকাশে মেঘ জমেছে।", "বিকেলে আমরা ফুটবল খেলি।", "চাঁদনী রাত খুব মনোরম. ", "সবাইকে ধন্যবাদ।", "শুভ জন্মদিন।", "বিদায় বন্ধু।", "খোদা হাফেজ।", "অদ্যপি সে কাজটি করেনি।",
-               "মুমূর্ষু রোগীর সেবা করো।", "বিমর্ষ বদনে বসে থেকো না।", "গীতাঞ্জলি রবীন্দ্রনাথের কাব্য।", "সান্ত্বনা দেওয়া সহজ কাজ নয়।", "অকারণে সময় নষ্ট করো না।", "অধ্যয়নই ছাত্রদের তসম্প্রতি।", "পরিষ্কার পরিচ্ছন্নতা ঈমানের অঙ্গ।", "সৌজন্যবোধ একটি মহৎ গুণ।", "সত্য বলা কঠিন কিন্তু উচিত।",
-            "বিদ্বানকে সকলে শ্রদ্ধা করে।", "দারিদ্রতা অভিশাপ নয়।", "पृथ्वी সূর্যের চারদিকে ঘোরে।", "এক মাঘে শীত যায় না।", "সততাই সর্বোত্তম পন্থা।", "অধিক সন্ন্যাসীতে গাজন নষ্ট।", "মানুষ মরণশীল প্রাণী।", "বন্যেরা বনে সুন্দর।", "চোর পালালে বুদ্ধি বাড়ে।", "দেশের সেবা করা ভালো।",
+               "মুমূর্ষু রোগীর সেবা করো।", "বিমর্ষ বদনে বসে থেকো না।", "গীতাঞ্জলি রবীন্দ্রনাথের কাব্য।", "সান্ত্বনা দেওয়া সহজ কাজ নয়।", "অকারণে সময় নষ্ট করো না।", "অধ্যয়নই ছাত্রদের তপস্যা।", "পরিষ্কার পরিচ্ছন্নতা ঈমানের অঙ্গ।", "সৌজন্যবোধ একটি মহৎ গুণ।", "সত্য বলা কঠিন কিন্তু উচিত।",
+            "বিদ্বানকে সকলে শ্রদ্ধা করে।", "দারিদ্রতা অভিশাপ নয়।", "পৃথিবী সূর্যের চারদিকে ঘোরে।", "এক মাঘে শীত যায় না।", "সততাই সর্বোত্তম পন্থা।", "অধিক সন্ন্যাসীতে গাজন নষ্ট।", "মানুষ মরণশীল প্রাণী।", "বন্যেরা বনে সুন্দর।", "চোর পালালে বুদ্ধি বাড়ে।", "দেশের সেবা করা ভালো।",
             "বিপদে মোরে রক্ষা করো আল্লাহ ", "গাছে কাঁঠাল গোঁফে তেল।", "সবুরে মেওয়া ফলে।", "দশের লাঠি একের বোঝা. ", "ভাবিয়া করিও কাজ।", "নিজের চরকায় তেল দাও।", "পরিশ্রম সৌভাগ্যের প্রসূতি।", "লোভে পাপ পাপে মৃত্যু।", "চকচক করলেই সোনা হয় না।", "অতি লোভে তাঁতি নষ্ট।",
             "অল্প বিদ্যা ভয়ংকরী।", "ইচ্ছা থাকলে উপায় হয়।", "চোরে না শোনে ধর্মের কাহিনী।", "জোর যার মুল্লুক তার।", "ডুবন্ত মানুষ খড়কুটোও ধরে।", "তেলা মাথায় তেল দেওয়া।", "নাই মামার চেয়ে কানা মামা ভালো।", "পাস করলেই শিক্ষিত হওয়া যায় না।", "যেমন কর্ম তেমন ফল।", "আকাশ কুসুম চিন্তা করা।",
             "মা শিশুকে চাঁদ দেখাচ্ছেন।", "গাছে গাছে ফুল ফুটেছে।", "নদীতে অনেক মাছ আছে।", "গরিবের দুঃখ কেউ বোঝে না।", "সময় কারো জন্য অপেক্ষা করে না।", "স্বাস্থ্যই সকল সুখের মূল।", "বই পড়ার অভ্যাস গড়ুন।", "একতাই বল।", "বিপদ কখনো একা আসে না।", "আয় বুঝে ব্যয় কর।",
@@ -1459,6 +1400,8 @@ spellcheck="false"></textarea>
             ];
 
     let customs = JSON.parse(localStorage.getItem('rah_v11_cust')) || [];
+    
+    
     let chars = [], timer = null, time = 0, active = false, done = false;
     const segmenter = new Intl.Segmenter('bn', { granularity: 'grapheme' });
 
@@ -1534,17 +1477,23 @@ function loadLesson() {
     let state = {
         pendingKar: "",
         gPressed: false
+        
     };
+    
+    let isBijoyActive = true; // বাই ডিফল্ট বিজয় অন থাকবে
 
+    
+let testMode = false;
+let wrongCount = 0;
+    
     input.addEventListener('keydown', function(e) {
-    
-    
-    
         const currentLang = document.getElementById('lang').value;
         if (currentLang === 'en') return;
 
-        if (currentLang === 'bn') {
-            if (e.ctrlKey || e.altKey || e.metaKey || e.key.length > 1) return;
+        if (currentLang === 'bn' && isBijoyActive) {
+    if (e.ctrlKey || e.altKey || e.metaKey || e.key.length > 1) return;
+    // ... বিজয়ের বাকি লজিক
+
 
             if (e.key === 'Backspace') {
                 state.pendingKar = "";
@@ -1664,7 +1613,7 @@ function loadLesson() {
         }
     });
 
-        input.addEventListener('input', function() {
+    input.addEventListener('input', function() {
         if (!active && input.value.length > 0 && !done) {
             active = true;
             timer = setInterval(() => {
@@ -1754,9 +1703,11 @@ function loadLesson() {
         }
 
         if(typed.length > 0) {
-            document.getElementById('st-acc').innerText = Math.round((correct/typed.length)*100) + "%";
-            document.getElementById('st-wrong').innerText = Math.round((typed.length/5)) ;
-        }
+    document.getElementById('st-acc').innerText = Math.round((correct/typed.length)*100) + "%";
+    // typedRaw.length ব্যবহার করলে আকার, একার, হসন্ত, স্পেস সহ সব ক্যারেক্টার ৫ এ ১ গণনায় আসবে
+    document.getElementById('st-wrong').innerText = Math.floor(typedRaw.length / 5);
+}
+
 
         const isLastCharComplete = (typed.length > chars.length) || 
                                    (typed[typed.length - 1] === chars[chars.length - 1]);
@@ -1782,8 +1733,8 @@ function loadLesson() {
             typed = typedRaw.split('');
         }
 
-        // ওয়ার্ড কাউন্ট বের করা
-        const wordCount = typedRaw.trim().length > 0 ? typedRaw.trim().split(/\s+/).filter(w => w.length > 0).length : 0;
+        // typedRaw.length দিয়ে বাংলা আকার/একার সহ মূল ক্যারেক্টার গণনা
+const wordCount = Math.floor(typedRaw.length / 5);
 
         const wpm = document.getElementById('st-wpm') ? document.getElementById('st-wpm').innerText : "0";
         const acc = document.getElementById('st-acc') ? document.getElementById('st-acc').innerText : "100%";
@@ -1842,12 +1793,14 @@ function loadLesson() {
     function updateTheme(v) { document.documentElement.setAttribute('data-theme', v); }
 
     function calculateWPM() {
-        if (time <= 0) return;
-        const typedRaw = input.value.normalize('NFC');
-        const typed = Array.from(segmenter.segment(typedRaw)).map(s => s.segment);
-        const wpm = Math.round((typed.length / 5) / (time / 60));
-        document.getElementById('st-wpm').innerText = wpm >= 0 ? wpm : 0;
-    }
+    if (time <= 0) return;
+    const typedRaw = input.value.normalize('NFC');
+    // typedRaw.length দিয়ে র ক্যারেক্টার গণনা করে WPM বের করা
+    const wordsTyped = typedRaw.length / 5;
+    const wpm = Math.round(wordsTyped / (time / 60));
+    document.getElementById('st-wpm').innerText = wpm >= 0 ? wpm : 0;
+}
+
 
     // গ্লোবাল কিবোর্ড শর্টকাট (Alt + C)
     window.addEventListener('keydown', (e) => {
@@ -1992,7 +1945,16 @@ function toggleSidebar() {
 
 
     window.addEventListener('load', () => { renderC(); initApp(); });
-</script>
+    
+    
+    
+    </script>
+
+
 <script src="./app.js" defer></script>
 </body>
-</html>
+</html>        
+
+    
+
+    
