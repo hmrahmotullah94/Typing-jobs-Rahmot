@@ -1,7 +1,7 @@
 {
   "id": "/Typing-jobs-Rahmot/",
   "name": "Typing_Jobs",
-  "short_name": "Typing_Jobs",
+  "short_name": "Typing_Job",
   "description": "বাংলা ও ইংরেজি টাইপিং অনুশীলনের অফলাইন PWA",
   "start_url": "/Typing-jobs-Rahmot/",
   "scope": "/Typing-jobs-Rahmot/",
