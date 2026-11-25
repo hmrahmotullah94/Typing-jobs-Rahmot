@@ -4,7 +4,7 @@
    Version 11.7
 ========================================== */
 
-const CACHE_NAME = "typingjobs-v11.7";
+const CACHE_NAME = "typingjobs-v11.8";
 
 const APP_ROOT = self.registration.scope;
 
