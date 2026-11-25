@@ -1286,20 +1286,17 @@
         if (modal && modal.style.display === "flex" && e.target === modal) {
             modal.style.display = "none";
         }
-        window.addEventListener('load', () => {
+        const lbModal = document.getElementById('leaderboard-modal');
+        if (lbModal && lbModal.style.display === "flex" && e.target === lbModal) {
+            lbModal.style.display = "none";
+        }
+    });
+
+    window.addEventListener('load', () => {
         const nameInput = document.getElementById('player-name');
         if (nameInput && playerName !== "Guest") {
             nameInput.value = playerName;
         }
-            });
-            const lbModal = document.getElementById('leaderboard-modal');
-        if (lbModal && lbModal.style.display === "flex" && e.target === lbModal) {
-            lbModal.style.display = "none";
-        }
-        
-    
-
-    
         renderC();
         initApp();
     });
