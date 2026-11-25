@@ -77,47 +77,32 @@ function checkInstallStatus(){
 ========================================= */
 
 
-if("serviceWorker" in navigator){
 
+if ("serviceWorker" in navigator) {
 
-window.addEventListener(
-"load",
-()=>{
+  window.addEventListener("load", async () => {
 
+    try {
 
-navigator.serviceWorker.register(
-"/Typing-jobs-Rahmot/service-worker.js"
-)
+      const swURL = new URL(
+        "./service-worker.js",
+        document.baseURI
+      );
 
+      const reg = await navigator.serviceWorker.register(swURL);
 
-.then(reg=>{
+      console.log("Service Worker Running:", reg.scope);
 
+    } catch (err) {
 
-console.log(
-"Service Worker Running:",
-reg.scope
-);
+      console.error("Service Worker Error:", err);
 
+    }
 
-})
-
-
-.catch(err=>{
-
-
-console.error(
-"Service Worker Error:",
-err
-);
-
-
-});
-
-
-});
-
+  });
 
 }
+
 
 
 
