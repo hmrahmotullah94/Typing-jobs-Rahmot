@@ -1289,11 +1289,7 @@
         
     });
 
-    window.addEventListener('load', () => {
-        const nameInput = document.getElementById('player-name');
-        if (nameInput && playerName !== "Guest") {
-            nameInput.value = playerName;
-        }
+    
         renderC();
         initApp();
     });
