@@ -4,7 +4,7 @@
    Made by Rahmotullah
 ========================================== */
 
-const CACHE_NAME = "typingjobs-v11.7";
+const CACHE_NAME = "typingjobs-v11.8";
 
 const OFFLINE_FILES = [
 
