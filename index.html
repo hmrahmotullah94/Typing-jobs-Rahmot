@@ -149,7 +149,12 @@
             textarea#input-area { font-size:15px; }
         }
         @media screen and (orientation: landscape) {
-            body { padding:5px; }
+            body { 
+                  display: flex;
+        flex-direction: column;
+        justify-content: flex-end; /* পুরো বডি নিচে নামাবে, উপরে জায়গা ফাঁকা রাখবে */
+        min-height: 120dvh;
+                padding:5px; }
             .container { max-width:none !important; width:100% !important; box-sizing:border-box; }
         }
         * { box-sizing:border-box; }
