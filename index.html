@@ -1291,12 +1291,13 @@
         if (nameInput && playerName !== "Guest") {
             nameInput.value = playerName;
         }
+            });
             const lbModal = document.getElementById('leaderboard-modal');
         if (lbModal && lbModal.style.display === "flex" && e.target === lbModal) {
             lbModal.style.display = "none";
         }
         
-    });
+    
 
     
         renderC();
