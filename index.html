@@ -150,10 +150,7 @@
         }
         @media screen and (orientation: landscape) {
             body { 
-                  display: flex;
-        flex-direction: column;
-        justify-content: flex-end; /* পুরো বডি নিচে নামাবে, উপরে জায়গা ফাঁকা রাখবে */
-        min-height: 120dvh;
+        
                 padding:5px; }
             .container { max-width:none !important; width:100% !important; box-sizing:border-box; }
         }
@@ -182,7 +179,12 @@
         .toggle-btn { position:fixed; top:5px; right:20px; width:45px; height:45px; border:none; border-radius:30%; background:var(--accent); color:white; font-size:22px; z-index:1200; cursor:pointer; }
         .pwa-bar { position:fixed; bottom:20px; left:20px; display:flex; gap:10px; align-items:center; padding:10px 15px; background:#121212; color:white; border-radius:15px; z-index:2000; }
         @media screen and (orientation:portrait) {
-            body { padding:10px; }
+            body { 
+                  display: flex;
+        flex-direction: column;
+        justify-content: flex-end; /* পুরো বডি নিচে নামাবে, উপরে জায়গা ফাঁকা রাখবে */
+        min-height: 120dvh;
+                padding:10px; }
             .typing-area { grid-template-columns:1fr; }
             textarea#input-area { height:140px; font-size:20px; }
             #display-text { position: relative; min-height:170px; font-size:20px; }
