@@ -1,156 +1,129 @@
+
 /* ==========================================
    Typing Jobs PWA Service Worker
-   Version 11.3
-   Made by Rahmotullah
+   Version 11.7
 ========================================== */
 
-const CACHE_NAME = "typingjobs-v11.8";
+const CACHE_NAME = "typingjobs-v11.7";
+
+const APP_ROOT = self.registration.scope;
 
 const OFFLINE_FILES = [
-
-  "/Typing-jobs-Rahmot/",
-  "/Typing-jobs-Rahmot/index.html",
-  "/Typing-jobs-Rahmot/manifest.json",
-  "/Typing-jobs-Rahmot/app.js",
-
-  "/Typing-jobs-Rahmot/icon-192.png",
-  "/Typing-jobs-Rahmot/icon-512.png",
-  "/Typing-jobs-Rahmot/icon-512-maskable.png"
-
-];
+  "./",
+  "./index.html",
+  "./manifest.json",
+  "./app.js",
+  "./icon-192.png",
+  "./icon-512.png",
+  "./icon-512-maskable.png"
+].map(path => new URL(path, APP_ROOT).href);
 
 
-/* ==========================
-   INSTALL
-========================== */
+/* INSTALL */
 
 self.addEventListener("install", event => {
 
-    self.skipWaiting();
-
-    event.waitUntil(
-
-        caches.open(CACHE_NAME)
-        .then(cache => cache.addAll(OFFLINE_FILES))
-
-    );
+  event.waitUntil(
+    caches.open(CACHE_NAME)
+      .then(cache => cache.addAll(OFFLINE_FILES))
+      .then(() => self.skipWaiting())
+  );
 
 });
 
 
-/* ==========================
-   ACTIVATE
-========================== */
+/* ACTIVATE */
 
 self.addEventListener("activate", event => {
 
-    event.waitUntil(
+  event.waitUntil(
 
-        caches.keys().then(keys => {
+    caches.keys().then(keys =>
 
-            return Promise.all(
-
-                keys.map(key => {
-
-                    if(key !== CACHE_NAME){
-
-                        return caches.delete(key);
-
-                    }
-
-                })
-
-            );
-
+      Promise.all(
+        keys.map(key => {
+          if (key !== CACHE_NAME) {
+            return caches.delete(key);
+          }
         })
+      )
 
-    );
+    ).then(() => self.clients.claim())
 
-    self.clients.claim();
+  );
 
 });
 
 
-/* ==========================
-   FETCH
-========================== */
+/* FETCH */
 
 self.addEventListener("fetch", event => {
 
-    if(event.request.method !== "GET") return;
+  if (event.request.method !== "GET") return;
 
-    /* HTML সবসময় Network First */
-    if(event.request.mode === "navigate"){
-
-        event.respondWith(
-
-            fetch(event.request)
-
-            .then(response => {
-
-                const copy = response.clone();
-
-                caches.open(CACHE_NAME)
-
-                .then(cache => {
-
-                    cache.put(event.request, copy);
-
-                });
-
-                return response;
-
-            })
-
-            .catch(() => {
-
-                return caches.match(event.request)
-
-                .then(r => r || caches.match("/Typing-jobs-Rahmot/index.html"));
-
-            })
-
-        );
-
-        return;
-
-    }
-
-
-    /* CSS / JS / Images */
+  if (event.request.mode === "navigate") {
 
     event.respondWith(
 
-        caches.match(event.request)
+      fetch(event.request)
 
-        .then(cacheResponse => {
+        .then(response => {
 
-            return cacheResponse ||
+          if (response.ok) {
 
-            fetch(event.request)
+            const copy = response.clone();
 
-            .then(networkResponse => {
+            event.waitUntil(
+              caches.open(CACHE_NAME)
+                .then(cache => cache.put(event.request, copy))
+            );
 
-                if(networkResponse.status === 200){
+          }
 
-                    const copy = networkResponse.clone();
+          return response;
 
-                    caches.open(CACHE_NAME)
+        })
 
-                    .then(cache => {
+        .catch(async () => {
 
-                        cache.put(event.request, copy);
-
-                    });
-
-                }
-
-                return networkResponse;
-
-            });
+          return await caches.match(event.request) ||
+                 await caches.match(
+                   new URL("./index.html", APP_ROOT).href
+                 );
 
         })
 
     );
+
+    return;
+  }
+
+
+  event.respondWith(
+
+    caches.match(event.request).then(cached => {
+
+      if (cached) return cached;
+
+      return fetch(event.request).then(response => {
+
+        if (response.ok) {
+
+          const copy = response.clone();
+
+          event.waitUntil(
+            caches.open(CACHE_NAME)
+              .then(cache => cache.put(event.request, copy))
+          );
+
+        }
+
+        return response;
+
+      });
+
+    })
+
+  );
 
 });
