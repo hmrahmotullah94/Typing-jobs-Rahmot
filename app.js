@@ -104,6 +104,19 @@ if ("serviceWorker" in navigator) {
 }
 
 
+// শুরুতে বাটন লুকিয়ে রাখুন (যতক্ষণ না ব্রাউজার নিশ্চিত করে যে অ্যাপটি ইনস্টল করা সম্ভব)
+if (pwaBar) {
+    pwaBar.hidden = true;
+}
+   
+  // Show the installation option when the browser allows installation.
+  window.addEventListener('beforeinstallprompt', (event) => {
+    event.preventDefault();
+    deferredPrompt = event;
+    showInstallBar();
+
+    console.log('PWA installation is available.');
+  });
 
 
 
