@@ -1,457 +1,129 @@
-/* =========================================
-   Typing Jobs PWA Controller
-   Made by Rahmotullah
-========================================= */
+/* ==========================================================================
+   Typing Jobs PWA
+   Service Worker Registration + PWA Installation
+   ========================================================================== */
 
+(() => {
+  'use strict';
 
-let deferredPrompt = null;
+  // Prevent duplicate initialization if this script is accidentally included twice.
+  if (window.__typingJobsPWAInitialized) {
+    return;
+  }
+  window.__typingJobsPWAInitialized = true;
 
+  let deferredPrompt = null;
 
+  function getPwaBar() {
+    return document.getElementById('pwaBar');
+  }
 
-/* =========================================
-   HIDE INSTALL BUTTON
-========================================= */
+  function getInstallButton() {
+    return document.getElementById('installButton');
+  }
 
-function hideInstallButton(){
+  function showInstallBar() {
+    const bar = getPwaBar();
 
-    const bar = document.getElementById("pwaBar");
+    if (bar) {
+      bar.hidden = false;
+      bar.style.display = 'flex';
+    }
+  }
 
-    if(bar){
+  function hideInstallBar() {
+    const bar = getPwaBar();
 
-        bar.hidden = true;
+    if (bar) {
+      bar.style.display = 'none';
+      bar.hidden = true;
+    }
+  }
 
+  // Register the Service Worker.
+  function registerServiceWorker() {
+    if (!('serviceWorker' in navigator)) {
+      console.warn('This browser does not support Service Workers.');
+      return;
     }
 
+    navigator.serviceWorker.register('./sw.js')
+      .then((registration) => {
+        console.log('Service Worker registered successfully:', registration);
+      })
+      .catch((error) => {
+        console.error('Service Worker registration failed:', error);
+      });
+  }
+// শুরুতে বাটন লুকিয়ে রাখুন (যতক্ষণ না ব্রাউজার নিশ্চিত করে যে অ্যাপটি ইনস্টল করা সম্ভব)
+if (pwaBar) {
+    pwaBar.hidden = true;
 }
+   
+  // Show the installation option when the browser allows installation.
+  window.addEventListener('beforeinstallprompt', (event) => {
+    event.preventDefault();
+    deferredPrompt = event;
+    showInstallBar();
 
+    console.log('PWA installation is available.');
+  });
 
+  // Install button handler.
+  document.addEventListener('click', async (event) => {
+    const button = event.target.closest('#installButton');
 
-/* =========================================
-   SHOW INSTALL BUTTON
-========================================= */
-
-function showInstallButton(){
-
-    const bar = document.getElementById("pwaBar");
-
-    if(bar){
-
-        bar.hidden = false;
-
+    if (!button || !deferredPrompt) {
+      return;
     }
 
-}
+    const promptEvent = deferredPrompt;
+    deferredPrompt = null;
 
+    try {
+      await promptEvent.prompt();
 
+      const choice = await promptEvent.userChoice;
+      console.log('PWA installation outcome:', choice.outcome);
 
-/* =========================================
-   CHECK APP INSTALLED
-========================================= */
-
-function checkInstallStatus(){
-
-
-    const installed =
-    window.matchMedia(
-        "(display-mode: standalone)"
-    ).matches
-    ||
-    window.navigator.standalone;
-
-
-
-    if(installed){
-
-        hideInstallButton();
-
+      if (choice.outcome === 'accepted') {
+        hideInstallBar();
+      }
+    } catch (error) {
+      console.error('PWA installation failed:', error);
     }
+  });
 
+  // Hide the installation bar after installation.
+  window.addEventListener('appinstalled', () => {
+    deferredPrompt = null;
+    hideInstallBar();
 
-}
+    console.log('PWA installed successfully.');
+  });
 
+  // Hide the installation bar if the app is already running as an installed app.
+  function checkStandaloneMode() {
+    const isStandalone =
+      window.matchMedia('(display-mode: standalone)').matches ||
+      window.navigator.standalone === true;
 
-
-
-/* =========================================
-   SERVICE WORKER REGISTER
-========================================= */
-
-
-if("serviceWorker" in navigator){
-
-
-window.addEventListener(
-"load",
-()=>{
-
-
-navigator.serviceWorker.register(
-"/Typing-jobs-Rahmot/service-worker.js"
-)
-
-
-.then(reg=>{
-
-
-console.log(
-"Service Worker Running:",
-reg.scope
-);
-
-
-})
-
-
-.catch(err=>{
-
-
-console.error(
-"Service Worker Error:",
-err
-);
-
-
-});
-
-
-});
-
-
-}
-
-
-
-
-
-/* =========================================
-   INSTALL PROMPT
-========================================= */
-
-
-window.addEventListener(
-"beforeinstallprompt",
-(e)=>{
-
-
-    e.preventDefault();
-
-
-    deferredPrompt = e;
-
-
-
-    const installed =
-    window.matchMedia(
-    "(display-mode: standalone)"
-    ).matches;
-
-
-
-    if(!installed){
-
-        showInstallButton();
-
+    if (isStandalone) {
+      hideInstallBar();
     }
+  }
 
+  // Initialize PWA features.
+  function initializePWA() {
+    registerServiceWorker();
+    checkStandaloneMode();
+  }
 
-});
-
-
-
-
-
-
-/* =========================================
-   INSTALL BUTTON CLICK
-========================================= */
-
-
-window.addEventListener(
-"DOMContentLoaded",
-()=>{
-
-
-    checkInstallStatus();
-
-
-
-    const installBtn =
-    document.getElementById(
-    "installButton"
-    );
-
-
-    const status =
-    document.getElementById(
-    "pwaStatus"
-    );
-
-
-
-    if(installBtn){
-
-
-    installBtn.addEventListener(
-    "click",
-    async()=>{
-
-
-        if(!deferredPrompt){
-
-
-            if(status){
-
-            status.innerHTML =
-            "Install প্রস্তুত নয়। Chrome Menu থেকে Install করুন।";
-
-            }
-
-
-            return;
-
-        }
-
-
-
-
-        deferredPrompt.prompt();
-
-
-
-        const result =
-        await deferredPrompt.userChoice;
-
-
-
-        if(result.outcome==="accepted"){
-
-
-            if(status){
-
-            status.innerHTML =
-            "অ্যাপ ইনস্টল হয়েছে";
-
-            }
-
-
-            hideInstallButton();
-
-
-        }
-        else{
-
-
-            if(status){
-
-            status.innerHTML =
-            "ইনস্টল বাতিল হয়েছে";
-
-            }
-
-
-        }
-
-
-
-        deferredPrompt = null;
-
-
-
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initializePWA, {
+      once: true
     });
-
-
-    }
-
-
-});
-
-
-
-
-
-
-
-/* =========================================
-   AFTER INSTALL
-========================================= */
-
-
-window.addEventListener(
-"appinstalled",
-()=>{
-
-
-console.log(
-"Typing Jobs Installed"
-);
-
-
-hideInstallButton();
-
-
-});
-
-
-
-
-
-
-
-/* =========================================
-   ONLINE OFFLINE STATUS
-========================================= */
-
-
-window.addEventListener(
-"online",
-()=>{
-
-
-const status =
-document.getElementById(
-"pwaStatus"
-);
-
-
-
-if(status){
-
-status.innerHTML =
-"Online Mode";
-
-}
-
-
-});
-
-
-
-
-window.addEventListener(
-"offline",
-()=>{
-
-
-const status =
-document.getElementById(
-"pwaStatus"
-);
-
-
-
-if(status){
-
-status.innerHTML =
-"Offline Mode";
-
-}
-
-
-});
-
-
-
-
-
-
-
-/* =========================================
-   SCREEN ROTATION SUPPORT
-========================================= */
-
-
-async function enableAutoRotation(){
-
-
-try{
-
-
-if(
-screen.orientation &&
-screen.orientation.lock
-){
-
-
-await screen.orientation.lock(
-"any"
-);
-
-
-console.log(
-"Rotation enabled"
-);
-
-
-}
-
-
-}
-
-catch(error){
-
-
-console.log(
-"Rotation controlled by device"
-);
-
-
-}
-
-
-}
-
-
-
-
-/* Installed app start হলে rotation চেষ্টা */
-
-window.addEventListener(
-"load",
-()=>{
-
-
-const installed =
-window.matchMedia(
-"(display-mode: standalone)"
-).matches;
-
-
-
-if(installed){
-
-enableAutoRotation();
-
-}
-
-
-});
-
-
-
-
-
-
-/* =========================================
-   SERVICE WORKER UPDATE CHECK
-========================================= */
-
-
-if(
-"serviceWorker" in navigator
-){
-
-
-navigator.serviceWorker.addEventListener(
-"controllerchange",
-()=>{
-
-
-console.log(
-"New update available"
-);
-
-
-});
-
-
-}
+  } else {
+    initializePWA();
+  }
+})();
